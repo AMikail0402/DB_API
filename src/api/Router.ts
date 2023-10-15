@@ -1,7 +1,7 @@
-const { createUser} = require("./Controller");
+import * as services from './Controller';
 const router = require("express").Router();
 
 
-router.post("/", createUser);
+router.post("/", services.createEntry);
 
 module.exports = router;
