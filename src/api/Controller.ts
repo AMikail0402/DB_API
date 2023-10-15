@@ -20,7 +20,7 @@ import * as db from '../Db';
         }
      function getEntries(req,res){
         let list = null;
-        db.client.query('Select * from exmple_table', (err, results) =>{
+        db.client.query('Select * from example_table', (err, results) =>{
                 if(!err){
                     list = results.rows;
                     console.log(list);
