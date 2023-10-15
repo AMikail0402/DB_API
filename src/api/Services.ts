@@ -2,7 +2,7 @@ const pool = require("../db")
 
 
    function create(data, callBack){
-        console.log(data);
+        console.log("Daten"+data);
         const name: string = "'"+data.name+"'";
         const adress: string = "'"+data.adress+"'";
         const gender: string = "'"+data.gender+"'";
@@ -12,5 +12,6 @@ const pool = require("../db")
         pool.query(query, callBack);
         
     } 
+
     
     export{create};

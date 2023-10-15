@@ -8,28 +8,20 @@ const client = new Client({
     database: "datenbank"
 })
 
-module.exports = {
-    query: (query,callBack) => {
+   
+    function query(query,callBack){
          client.query(query,(err,res) => {
             if(!err){
+                console.log("Ergebnis in db.ts"+JSON.stringify(res.rows))
                 return callBack(null, "Successful Operation")
             }
             else{
                 return callBack(err, "Operation not permitted");
             }
-            client.end()
          })
     }
-}
 
-client.connect();
+    client.connect();
 
-client.query('Select * from example_table', (err, res) =>{
-if(!err){
-    console.log(res.rows);
-}
-else{
-    console.log(err.message);
-}
-client.end;
-});
+
+export{query,client}
