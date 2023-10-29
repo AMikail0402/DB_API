@@ -18,7 +18,7 @@
       "watch": [
         "./src"
       ],
-      "ext": "js,ts"
+      "ext": "txt"
     },
    "scripts": {
       "start": "nodemon src/app.ts",
