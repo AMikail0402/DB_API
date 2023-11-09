@@ -10,6 +10,7 @@ const client = new Client({
 
    
     function query(query,callBack){
+
          client.query(query,(err,res) => {
             if(!err){
                 console.log("Ergebnis in db.ts"+JSON.stringify(res.rows))
@@ -19,6 +20,7 @@ const client = new Client({
                 return callBack(err, "Operation not permitted");
             }
          })
+         
     }
 
     client.connect();

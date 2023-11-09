@@ -1,10 +1,10 @@
-import * as services from './Services';
-import * as db from '../Db';
+import {create } from './Services';
+import { client } from '../Db';
 
     function createEntry(req,res){
             const body = req.body;
             console.log("body"+body);
-            services.create(body, (err,results) => {
+            create(body, (err,results) => {
                 if(err){
                     console.log("Error1"+err);
                     return res.status(500).json({success:0,
@@ -20,7 +20,7 @@ import * as db from '../Db';
         }
      function getEntries(req,res){
         let list = null;
-        db.client.query('Select * from example_table', (err, results) =>{
+        client.query('Select * from example_table', (err, results) =>{
                 if(!err){
                     list = results.rows;
                     console.log(list);
