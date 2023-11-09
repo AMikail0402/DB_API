@@ -6,9 +6,10 @@ const pool = require("../db")
         const cve: string = "'"+data.cve+"'";
         const msg: string = "'"+data.msg+"'";
         const time: string = "'"+data.time+"'";
+        const src_address: string = "'"+data.src_address+"'";
         console.log("CVE"+cve+"\nNachricht"+msg+"\nZeit"+time) 
-        console.log("SQL-Befehl: "+'insert into example_table (name, adress, gender) values ('+cve+','+msg+','+time+')')
-        const query: string = 'insert into example_table (cve, msg, time) values ('+cve+','+msg+','+time+')';
+        console.log("SQL-Befehl: "+'insert into example_table (cve, msg, time, src_address) values ('+cve+','+msg+','+time+','+src_address+')');
+        const query: string = 'insert into example_table (cve, msg, time, src_address) values ('+cve+','+msg+','+time+','+src_address+')';
         pool.query(query, callBack);
         
     } 
