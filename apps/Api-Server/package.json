@@ -13,8 +13,8 @@
     "typescript": "4.5.2"
   },
   "scripts": {
-    "start": "ts-node ./apps/Api-Server/src/app.ts",
-    "dev": "nodemon ./apps/Api-Server/src/app.ts",
+    "start": "ts-node ./src/app.ts",
+    "dev": "nodemon ./src/app.ts",
     "typeorm": "typeorm-ts-node-commonjs"
   }
 }
