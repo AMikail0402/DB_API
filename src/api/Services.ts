@@ -1,4 +1,4 @@
-const pool = require("../db")
+const pool = require("../Db/db")
 
 
    function create(data, callBack){
@@ -14,5 +14,4 @@ const pool = require("../db")
         
     } 
 
-    
     export{create};

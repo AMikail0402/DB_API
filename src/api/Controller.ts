@@ -1,5 +1,5 @@
 import {create } from './Services';
-import { client } from '../Db';
+import { client } from '../Db/Db';
 
     function createEntry(req,res){
             const body = req.body;
