@@ -1,4 +1,4 @@
-const pool = require("../Db/db")
+import { client }  from '../Db/Db';
 
 
    function create(data, callBack){
@@ -10,7 +10,7 @@ const pool = require("../Db/db")
         console.log("CVE"+cve+"\nNachricht"+msg+"\nZeit"+time) 
         console.log("SQL-Befehl: "+'insert into example_table (cve, msg, time, src_address) values ('+cve+','+msg+','+time+','+src_address+')');
         const query: string = 'insert into example_table (cve, msg, time, src_address) values ('+cve+','+msg+','+time+','+src_address+')';
-        pool.query(query, callBack);
+        client.query(query, callBack);
         
     } 
 

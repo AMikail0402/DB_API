@@ -1,7 +1,7 @@
 import * as services from './Controller';
-const router = require("express").Router();
+const Router = require("express").Router();
 
+Router.post("/", services.createEntry);
+Router.get("/",services.getEntries)
 
-router.post("/", services.createEntry);
-router.get("/",services.getEntries)
-module.exports = router;
+export {Router}

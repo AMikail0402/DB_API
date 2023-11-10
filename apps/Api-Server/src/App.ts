@@ -1,10 +1,12 @@
 const  express   = require('express');
+import { Router}  from './api/Router';
+
 const app = express();
-const userRouter = require("./api/Router")
+
 
 app.use(express.json());
 
-app.use("/api/users", userRouter);
+app.use("/api/users", Router);
 
 app.get("/api", (req, res) => {
 
