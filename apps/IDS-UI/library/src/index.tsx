@@ -1,16 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ListFormat } from 'typescript';
-import { ListElement }from './ListElement';
+import { ListElement }from './components/ListElement';
+import { Bookslist } from  './components/Booklist';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
+    <Bookslist/>
    <ListElement name="alpay"/>
   </React.StrictMode>
 );

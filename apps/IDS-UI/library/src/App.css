@@ -13,6 +13,10 @@
   }
 }
 
+.Booklist-head {
+    font-size: 400px;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
