@@ -6,7 +6,7 @@ type Entry = {
   src_address: string;
 };
 
-type Response = {
+type GetResponse = {
   data: Entry[];
 };
 
@@ -25,7 +25,7 @@ async function getEntries() {
     }
 
     // 👇️ const result: GetUsersResponse
-    const result = await (response.json()) as Response
+    const result = await (response.json()) as GetResponse
 
     console.log('result is: ', JSON.stringify(result, null, 4));
 
@@ -42,4 +42,4 @@ async function getEntries() {
   }
 }
 
-getEntries();
+export { getEntries }
