@@ -7,3 +7,11 @@
 .table-body {
     background-color: beige;
 }
+
+th {
+    border-bottom: 3px solid black;
+}
+
+td {
+    padding: 5px 10px
+}
