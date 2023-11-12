@@ -22,11 +22,9 @@ import { client } from '../Db/Db';
         let list = null;
         client.query('Select * from example_table', (err, results) =>{
                 if(!err){
-                    list = results.rows;
+                    
                     console.log(list);
-                    return res.status(200).json({success:1,
-                        message: "Operation permitted",
-                        list}) 
+                    return res.status(200).json(results.rows) 
                 }
                 else{
                     console.log("Error1"+err);
