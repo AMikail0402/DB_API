@@ -4,9 +4,26 @@ pipeline {
         IMAGE_SHA = ''
     }
     stages {
+        
+        stage('Clean Data'){
+            sh('sudo /bash_scripts/clear.sh')
+        }
+
+        stage('Start DB'){
+            sh('sudo docker-compose -f /opt/DB_PG/docker-compose.yaml up')
+        }
 
         stage('Create Network'){
-            steps{script{
+            steps{
+                script{
+                sh 'sudo docker network create --subnet 172.18.0.0/24 --gateway 172.18.0.1 apinet'
+            }
+            }
+        }
+
+        stage('Create Network'){
+            steps{
+                script{
                 sh 'sudo docker network create --subnet 172.18.0.0/24 --gateway 172.18.0.1 apinet'
             }
             }
