@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    environment {
+        IMAGE_SHA = ''
+    }
     stages {
 
         stage('Create Network'){
@@ -15,14 +17,14 @@ pipeline {
             script{
                def dockerBuildOutput = sh(script: 'sudo docker build .', returnStdout: true, tty: false).trim()
                def imageShaMatch = dockerBuildOutput =~ /Successfully built ([a-f0-9]+)/
-               def imageSha = imageShaMatch[0][1]
+               IMAGE_SHA = imageShaMatch[0][1]
             }
          }
         }
         stage('Deploy') {
             steps {
                 script{
-                sh ("sudo docker run --network apinet -p 3001:3001 -d ${imageSha}")
+                sh ("sudo docker run --network apinet -p 3001:3001 -d ${IMAGE_SHA}")
                 }
             }
         }
