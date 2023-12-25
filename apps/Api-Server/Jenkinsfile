@@ -1,17 +1,22 @@
 pipeline {
     agent any
 
-     environment {
-        PATH = "/usr/share/maven/bin:$PATH"
-    }
-
     stages {
-        stage('Build') {
-            steps {
-                sh 'mvn clean install -DskipTests'
+
+        stage('Create Network'){
+            steps{
+                sh 'docker network create --subnet 172.18.0.0/24 --gateway 172.18.0.1 apinet'
             }
         }
-        stage('Test') {
+
+        stage('Build') {
+            steps {
+               def dockerBuildOutput = sh(script: 'docker build .', returnStdout: true).trim()
+               dockerBuildOutput = /Successfully built ([a-f0-9]+)/
+               sh("echo ${dockerBuildOutput}")
+            }
+        }
+        stage('Deploy') {
             steps {
                 sh 'mvn test'
             }
