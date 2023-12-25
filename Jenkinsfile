@@ -14,7 +14,8 @@ pipeline {
             steps {
                 script{
                def dockerBuildOutput = sh(script: 'sudo docker build .', returnStdout: true).trim()
-               def imageSha = dockerBuildOutput =~ /Successfully built ([a-f0-9]+)/
+               def imageShaMatch = dockerBuildOutput =~ /Successfully built ([a-f0-9]+)/
+               def imageSha = imageShaMatch[0][1]
                sh("echo ${imageSha}")
             }
          }
