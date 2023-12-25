@@ -5,10 +5,12 @@ pipeline {
     }
     stages {
         
-        stage('Clean Data'){
+        stage('Reset Workplace'){
             steps{
             script{
             sh('sudo /bash_scripts/clear.sh')
+            def pid = sh(script: 'ps aux | grep 'java -jar jids-1.0-SNAPSHOT-jar-with-dependencies.jar 127.0.0.1' | awk '{print $2}'', returnStdout: true, tty: false).trim()
+            sh('kill ${pid} 2> /dev/null')
             }
             }
         }
