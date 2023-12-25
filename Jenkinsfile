@@ -12,8 +12,8 @@ pipeline {
         stage('Build') {
             steps {
                def dockerBuildOutput = sh(script: 'docker build .', returnStdout: true).trim()
-               dockerBuildOutput = /Successfully built ([a-f0-9]+)/
-               sh("echo ${dockerBuildOutput}")
+               def imageSha = dockerBuildOutput =~ /Successfully built ([a-f0-9]+)/
+               sh("echo ${imageSha}")
             }
         }
         stage('Deploy') {
