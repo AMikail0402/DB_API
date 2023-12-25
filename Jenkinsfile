@@ -16,7 +16,7 @@ pipeline {
         stage('Start DB'){
             steps{
             script{
-            sh('sudo docker-compose -f /opt/DB_PG/docker-compose.yml up')
+            sh('sudo docker-compose -f /opt/DB_PG/docker-compose.yml up -d')
             }
             }
         }
