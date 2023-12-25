@@ -23,7 +23,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script{
-                sh 'echo deploy'
+                sh ("sudo docker run --network apinet -p 3001:3001 -d ${imageSha}")
                 }
             }
         }
