@@ -6,11 +6,15 @@ pipeline {
     stages {
         
         stage('Clean Data'){
+            script{
             sh('sudo /bash_scripts/clear.sh')
+            }
         }
 
         stage('Start DB'){
+            script{
             sh('sudo docker-compose -f /opt/DB_PG/docker-compose.yaml up')
+            }
         }
 
         stage('Create Network'){
