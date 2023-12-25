@@ -12,11 +12,10 @@ pipeline {
 
         stage('Build') {
             steps {
-                script{
-               def dockerBuildOutput = sh(script: 'sudo docker build .', returnStdout: true).trim()
+            script{
+               def dockerBuildOutput = sh(script: 'sudo docker build .', returnStdout: true, tty: false).trim()
                def imageShaMatch = dockerBuildOutput =~ /Successfully built ([a-f0-9]+)/
                def imageSha = imageShaMatch[0][1]
-               sh("echo ${imageSha}")
             }
          }
         }
