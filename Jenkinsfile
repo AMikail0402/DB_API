@@ -10,7 +10,7 @@ pipeline {
             script{
             //sh('sudo /bash_scripts/clear.sh')
             def awkprint = '{print $2}'
-            sh 'pid=$(ps aux | grep 'java -jar jids-1.0-SNAPSHOT-jar-with-dependencies.jar 127.0.0.1' | awk '{print $2}')'
+            sh "pid=$(ps aux | grep 'java -jar jids-1.0-SNAPSHOT-jar-with-dependencies.jar 127.0.0.1' | awk '{print $2}')"
             sh 'kill $pid 2> /dev/null'
             }
             }
