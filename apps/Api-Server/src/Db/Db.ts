@@ -1,7 +1,10 @@
 import { Client } from 'pg';
+import * as dotenv from 'dotenv';
 
-const client = new Client({
-    host: "localhost",
+dotenv.config();
+console.log("Der Host:"+process.env.HOST);
+const client = new Client({ 
+    host: process.env.HOST,
     user: "admin",
     port: "5432",
     password: "admin",
