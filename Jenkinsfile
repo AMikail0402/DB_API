@@ -32,9 +32,9 @@ pipeline {
         stage('Kill IDS'){
             steps{
                 script{
-                    def jobs = sh(script: "jobs -p", returnStdout: true)
+                    def idsProcesses = sh(script: "ps aux | grep 'java -jar jids-1.0-SNAPSHOT-jar-with-dependencies.jar' | awk '{print \$2}'",returnStdout: true).trim()
                     if(jobs != ""){
-                    sh("sudo kill ${jobs}")
+                    sh("sudo kill ${idsProcesses}")
                     }
                 }
             }
