@@ -9,7 +9,7 @@ pipeline {
             steps{
                 script{  
                 def containers = sh(script: "sudo docker ps -q", returnStdout: true).trim()    
-                if(containers != null){
+                if(containers != ""){
                     sh("sudo docker kill 2> /dev/null")
                     }
                 sh("sudo docker system prune --force")
