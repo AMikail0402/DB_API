@@ -14,10 +14,9 @@ pipeline {
                 if(containers != ""){
                     sh("sudo docker kill ${containers} 2> /dev/null")
                     }
-                //Networks
-                def row = '1'    
+                //Networks 
                 def pg_net = sh(script: " sudo docker network ls | grep pg_net | awk '{print \$1}' ",returnStdout: true).trim()
-                def apinet = sh(script: " sudo docker network ls | grep pg_net | awk '{print \$1}' ",returnStdout: true).trim()
+                def apinet = sh(script: " sudo docker network ls | grep apinet | awk '{print \$1}' ",returnStdout: true).trim()
                 if(pg_net != ""){
                     sh("sudo docker network rm ${pg_net}")
                 }
@@ -41,14 +40,6 @@ pipeline {
             }
         }
 
-        stage('Start DB'){
-            steps{
-                script{
-                sh('sudo docker-compose -f /opt/DB_PG/docker-compose.yml up -d')
-                }
-            }
-        }
-
         stage('Create Networks'){
             steps{
                 script{
@@ -58,7 +49,16 @@ pipeline {
             }
         }
 
-        stage('Build') {
+
+        stage('Start DB'){
+            steps{
+                script{
+                sh('sudo docker-compose -f /opt/DB_PG/docker-compose.yml up -d')
+                }
+            }
+        }
+
+        stage('Build API') {
             steps {
             script{
                def dockerBuildOutput = sh(script: 'sudo docker build . | grep Successfully', returnStdout: true, tty: false).trim()
@@ -67,7 +67,7 @@ pipeline {
             }
          }
         }
-        stage('Deploy') {
+        stage('Deploy API') {
             steps {
                 script{
                 sh ("sudo docker run --network apinet -p 3001:3001 -d ${IMAGE_SHA}")
