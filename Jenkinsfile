@@ -8,7 +8,8 @@ pipeline {
         stage('Cleanup Docker'){
             steps{
                 script{  
-                def containers = sh(script: "sudo docker ps -q", returnStdout: true).trim()    
+                def containers = sh(script: "sudo docker ps -q", returnStdout: true).trim()   
+                sh("echo 'Containers Output: ${containers}'") 
                 if(containers != ""){
                     sh("sudo docker kill 2> /dev/null")
                     }
