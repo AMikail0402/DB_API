@@ -34,7 +34,7 @@ pipeline {
         stage('Kill IDS'){
             steps{
                 script{
-                    def idsProcesses = sh(script: "ps aux | grep 'java -jar jids-1.0-SNAPSHOT-jar-with-dependencies.jar' | grep -v grep | awk '{print \$2}'",returnStdout: true).trim()
+                    def idsProcesses = sh(script: "ps aux | grep 'nohup java -jar jids-1.0-SNAPSHOT-jar-with-dependencies.jar' | grep -v grep | awk '{print \$2}'",returnStdout: true).trim()
                     sh("echo 'unsere Prozesse ${idsProcesses}'")
                     if(idsProcesses != ""){
                     sh("sudo kill ${idsProcesses}")
