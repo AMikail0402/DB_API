@@ -12,7 +12,11 @@ pipeline {
                 def containers = sh(script: "sudo docker ps -q", returnStdout: true).trim()   
                 sh("echo 'Containers Output: ${containers}'") 
                 if(containers != ""){
-                    sh("sudo docker kill ${containers} 2> /dev/null")
+                    def containerArray = containers.split();
+                    containerArray.each {
+                        id -> 
+                        sh("sudo docker kill ${id} 2> /dev/null")
+                    }
                     }
                 //Networks 
                 def pg_net = sh(script: " sudo docker network ls | grep pg_net | awk '{print \$1}' ",returnStdout: true).trim()
@@ -37,7 +41,12 @@ pipeline {
                     def idsProcesses = sh(script: "ps aux | grep 'java -jar jids-1.0-SNAPSHOT-jar-with-dependencies.jar' | grep -v grep | awk '{print \$2}'",returnStdout: true).trim()
                     sh("echo 'unsere Prozesse ${idsProcesses}'")
                     if(idsProcesses != ""){
-                    sh("sudo kill -SIGKILL ${idsProcesses}")
+                    def idsArray = idsProcesses.split()
+                    idsArray.each {
+                        id ->
+                        sh("sudo kill -SIGKILL ${id}")
+                    }    
+                    
                     }
                 }
             }
