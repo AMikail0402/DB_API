@@ -16,8 +16,8 @@ pipeline {
                     }
                 //Networks
                 def row = '1'    
-                def pg_net = sh(scripts: "sudo docker network ls | grep pg_net | awk '{print '+'$'+'1}'",returnStdout: true).trim()
-                def apinet = sh(scripts: "sudo docker network ls | grep apinet | awk '{print '+'$'+'1}'",returnStdout: true).trim()
+                def pg_net = sh(scripts: ""sudo docker network ls | grep pg_net | awk "{print ${'$'}1}""",returnStdout: true).trim()
+                def apinet = sh(scripts: ""sudo docker network ls | grep pg_net | awk "{print ${'$'}1}""",returnStdout: true).trim()
                 if(pg_net != ""){
                     sh("sudo docker network rm ${pg_net}")
                 }
