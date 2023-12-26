@@ -21,7 +21,10 @@ pipeline {
         stage('Kill IDS'){
             steps{
                 script{
-                    sh("sudo kill \$(jobs -p)")
+                    def jobs = sh(script: "jobs -p", returnStdout: true)
+                    if(jobs != ""){
+                    sh("sudo kill ${jobs}")
+                    }
                 }
             }
         }
