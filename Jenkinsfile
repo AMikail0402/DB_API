@@ -7,8 +7,11 @@ pipeline {
         
         stage('Cleanup Docker'){
             steps{
-                script{
-                sh("sudo docker kill \$(sudo docker ps -a -q) 2> /dev/null")
+                script{  
+                def containers = sh("sudo docker ps -q", returnStdout: true).trim()    
+                if(containers != null){
+                    sh("sudo docker kill 2> /dev/null")
+                    }
                 sh("sudo docker system prune --force")
                 }
             }
