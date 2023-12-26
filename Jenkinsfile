@@ -9,10 +9,11 @@ pipeline {
             steps{
             script{
             //sh('sudo /bash_scripts/clear.sh')
+            sh("sudo docker network rm apinet")
             def awkprint = '{print $2}'
             def command = """ps aux | grep 'java -jar jids-1.0-SNAPSHOT-jar-with-dependencies.jar 127.0.0.1' | awk '{print \$2}'"""
             def pid = sh(script: command, returnStdout: true).trim()
-            sh("kill ${pid} 2> /dev/null")
+            sh("sudo kill ${pid} 2> /dev/null")
             }
             }
         }
