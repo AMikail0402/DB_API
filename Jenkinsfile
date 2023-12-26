@@ -8,7 +8,7 @@ pipeline {
         stage('Cleanup Docker'){
             steps{
                 script{
-                sh("sudo docker kill $(docker ps -a -q) 2> /dev/null")
+                sh("sudo docker kill \$(docker ps -a -q) 2> /dev/null'")
                 sh("docker system prune --force")
                 }
             }
@@ -17,7 +17,7 @@ pipeline {
         stage('Kill IDS'){
             steps{
                 script{
-                    sh("kill $(jobs -p)")
+                    sh("kill \$(jobs -p)")
                 }
             }
         }
