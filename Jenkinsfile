@@ -11,7 +11,7 @@ pipeline {
                 def containers = sh(script: "sudo docker ps -q", returnStdout: true).trim()   
                 sh("echo 'Containers Output: ${containers}'") 
                 if(containers != ""){
-                    sh("sudo docker kill 2> /dev/null")
+                    sh("sudo docker kill ${containers} 2> /dev/null")
                     }
                 sh("sudo docker system prune --force")
                 }
