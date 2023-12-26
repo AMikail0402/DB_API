@@ -5,14 +5,20 @@ pipeline {
     }
     stages {
         
-        stage('Reset Workplace'){
+        stage('Cleanup Docker'){
             steps{
             script{
-            //sh('sudo /bash_scripts/clear.sh')
-            def command = """sudo ps aux | grep 'java -jar jids-1.0-SNAPSHOT-jar-with-dependencies.jar 127.0.0.1' | awk '{print \$2}'"""
-            def pid = sh(script: command, returnStdout: true).trim()
-            sh("sudo kill ${pid} 2> /dev/null")
+            sh("sudo docker kill $(docker ps -a -q) 2> /dev/null")
+            sh("docker system prune --force")
             }
+            }
+        }
+
+        stage('Kill IDS'){
+            steps{
+                script{
+                    sh("kill $(jobs -p)")
+                }
             }
         }
 
