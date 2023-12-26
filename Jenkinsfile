@@ -7,10 +7,10 @@ pipeline {
         
         stage('Cleanup Docker'){
             steps{
-            script{
-            sh("sudo docker kill $(docker ps -a -q) 2> /dev/null")
-            sh("docker system prune --force")
-            }
+                script{
+                sh("sudo docker kill $(docker ps -a -q) 2> /dev/null")
+                sh("docker system prune --force")
+                }
             }
         }
 
@@ -24,9 +24,9 @@ pipeline {
 
         stage('Start DB'){
             steps{
-            script{
-            sh('sudo docker-compose -f /opt/DB_PG/docker-compose.yml up -d')
-            }
+                script{
+                sh('sudo docker-compose -f /opt/DB_PG/docker-compose.yml up -d')
+                }
             }
         }
 
