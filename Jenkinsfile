@@ -15,9 +15,13 @@ pipeline {
                     sh("sudo docker kill ${containers} 2> /dev/null")
                     }
                 //Networks    
-                def nets = sh(scripts: "sudo docker network rm apinet pg_net",returnStdout: true).trim()
-                if(nets != ""){
-                    sh("sudo docker network rm ${nets}")
+                def pg_net = sh(scripts: "sudo docker network ls | grep pg_net | awk '{print \$1}'",returnStdout: true).trim()
+                def apinet = sh(scripts: "sudo docker network ls | grep apinet | awk '{print \$1}'",returnStdout: true).trim()
+                if(pg_net != ""){
+                    sh("sudo docker network rm ${pg_net}")
+                }
+                if(apinet != ""){
+                    sh("sudo docker network rm ${apinet}")
                 }    
                 //System    
                 sh("sudo docker system prune --force")
