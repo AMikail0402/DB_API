@@ -15,8 +15,10 @@ pipeline {
                     sh("sudo docker kill ${containers} 2> /dev/null")
                     }
                 //Networks 
-                def pg_net = sh(script: " sudo docker network ls \| grep pg_net \| awk '{print \$1}' ",returnStdout: true).trim()
-                def apinet = sh(script: " sudo docker network ls \| grep apinet \| awk '{print \$1}' ",returnStdout: true).trim()
+                def pg_net = sh(script: " sudo docker network ls | grep pg_net | awk '{print \$1}' ",returnStdout: true).trim()
+                def apinet = sh(script: " sudo docker network ls | grep apinet | awk '{print \$1}' ",returnStdout: true).trim()
+                sh("echo 'Das PG-Network${pg_net}'")
+                sh("echo 'Das API-Network${apinet}'")
                 if(pg_net != ""){
                     sh("sudo docker network rm ${pg_net}")
                 }
@@ -32,7 +34,8 @@ pipeline {
         stage('Kill IDS'){
             steps{
                 script{
-                    def idsProcesses = sh(script: "ps aux \| grep 'java -jar jids-1.0-SNAPSHOT-jar-with-dependencies.jar' \| awk '{print \$2}'",returnStdout: true).trim()
+                    def idsProcesses = sh(script: "ps aux | grep 'java -jar jids-1.0-SNAPSHOT-jar-with-dependencies.jar' \| awk '{print \$2}'",returnStdout: true).trim()
+                    sh("echo 'unsere Prozesse ${idsProcesses}'")
                     if(idsProcesses != ""){
                     sh("sudo kill ${idsProcesses}")
                     }
