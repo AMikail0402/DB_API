@@ -1,5 +1,6 @@
 import { create } from './Services';
 import { client } from '../Db/Db';
+import * as converter from '../util/Converter';
 
     function createEntry(req,res){
             const body = req.body;
@@ -20,16 +21,20 @@ import { client } from '../Db/Db';
         }
      function getEntries(req,res){
         let list = null;
-        client.query('Select * from example_table', (err, results) =>{
+        client.query('Select * from example_table', (err, results) => {
                 if(!err){
                     
                     console.log(list);
-                    return res.status(200).json(results.rows) 
+                    //res.status(200).json(results.rows);
+                    res.writeStyle
+                    res.send(converter.convertJsonToHtmlTable(results.rows));
+                    return;
+              
                 }
                 else{
                     console.log("Error1"+err);
-                    return res.status(500).json({success:0,
-                    message: "Database connection error"})
+                    res.status(500).json({success:0,message: "Database connection error"});
+                    return
 
                 }
                 
