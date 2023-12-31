@@ -66,6 +66,5 @@ function convertJsonToHtmlTable(json): string{
       row = row.concat("</tr>")
       return row;
   }
-  //convertJsonToHtmlTable(list);
 
 export {convertJsonToHtmlTable}
