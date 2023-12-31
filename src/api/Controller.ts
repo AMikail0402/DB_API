@@ -26,7 +26,6 @@ import * as converter from '../util/Converter';
                     
                     console.log(list);
                     //res.status(200).json(results.rows);
-                    res.writeStyle
                     res.send(converter.convertJsonToHtmlTable(results.rows));
                     return;
               
