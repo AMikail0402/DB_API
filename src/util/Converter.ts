@@ -38,7 +38,6 @@ function convertJsonToHtmlTable(json): string{
     let cols = Object.keys(json[0]);
  
     table = table.concat(createTableHead(cols));
-     // Loop through the JSON data and create table rows
      json.forEach((item) => {
       table = table.concat("\n",createRow(item));
      });
