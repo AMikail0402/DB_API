@@ -31,9 +31,10 @@ let value = [{
    "time": "Wed Dec 27 13:10:07 UTC 2023",
    "src_address": "/231.131.181.142"
 }];
-
+let count:number = 0;
 function convertJsonToHtmlTable(json): string{
-   let table:string = "<table style='border: 1px solid black; border-collapse: collapse; width: 50%;'>\n";
+   count = 0;
+   let table:string = "<table style='font-family: Verdana; border: 1px solid black; border-collapse: collapse; width: 50%;'>\n";
     let cols = Object.keys(json[0]);
  
     table = table.concat(createTableHead(cols));
@@ -42,7 +43,9 @@ function convertJsonToHtmlTable(json): string{
       table = table.concat("\n",createRow(item));
      });
      table =table.concat("\n","</table>");
-     return table;
+     let countReport:string = "<h1 style='font-family: Verdana'>"+count+" verdächtige Pakete wurden gefunden\n";
+     const endTable = countReport+table
+     return endTable;
   }
 
   function createTableHead(item: string[]): string{
@@ -62,6 +65,7 @@ function convertJsonToHtmlTable(json): string{
      let arr:string[] = Object.values(val);
       arr.forEach((x)=>{
          row = row.concat("\t<td style='border: 1px solid black; border-collapse: collapse;'>",x,"</td>\n")
+         count++;
       })
       row = row.concat("</tr>")
       return row;
