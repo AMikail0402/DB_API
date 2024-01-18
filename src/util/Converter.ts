@@ -64,8 +64,8 @@ function convertJsonToHtmlTable(json): string{
      let arr:string[] = Object.values(val);
       arr.forEach((x)=>{
          row = row.concat("\t<td style='border: 1px solid black; border-collapse: collapse;'>",x,"</td>\n")
-         count++;
       })
+      count++;
       row = row.concat("</tr>")
       return row;
   }
